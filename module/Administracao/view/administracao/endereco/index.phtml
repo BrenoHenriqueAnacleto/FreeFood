@@ -1,0 +1,100 @@
+<?php
+$count = 0;
+foreach ($this->endereco as $arre):
+?>
+<div class="arrematante" id="<?php echo 'arrematante' . $count; ?>">
+    <input type="hidden" name="endereco[<?php echo $count; ?>][pessoa_id]" value="<?php echo (isset($arre->pessoa_id)) ? $arre->pessoa_id : ''; ?>"/>
+    <input type="hidden" name="endereco[<?php echo $count; ?>][id]" value="<?php echo (isset($arre->id)) ? $arre->id : ''; ?>"/>
+    <div class="row">
+        <div class="form-group col-2">
+            <label>CEP</label>
+            <?php
+            $cep = new Zend\Form\Element\Text('endereco[' . $count . '][cep]');
+
+            $cep->setAttributes(array(
+            'class' => 'form-control',
+            'placeholder'=>'CEP'));
+
+            $cep->setValue((isset($arre->cep)) ? $arre->cep : '');
+
+            echo $this->formInput($cep);
+            ?>
+        </div>
+        <div class="form-group col-5">
+            <label>Rua</label>
+            <?php
+            $rua = new Zend\Form\Element\Text('endereco[' . $count . '][rua]');
+
+            $rua->setAttributes(array(
+            'class' => 'form-control ',
+            'placeholder'=>'Rua'));
+
+            $rua->setValue((isset($arre->rua)) ? $arre->rua : '');
+
+            echo $this->formInput($rua);
+            ?>
+        </div>
+        <div class="col-5">
+            <label>Bairro</label>
+            <?php
+            $bairro = new Zend\Form\Element\Text('endereco[' . $count . '][bairro]');
+
+            $bairro->setAttributes(array(
+            'class' => 'form-control',
+            'placeholder'=>'Bairro'));
+
+            $bairro->setValue((isset($arre->bairro)) ? $arre->bairro : '');
+
+            echo $this->formInput($bairro);
+            ?>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-6">
+            <label>Cidade</label>
+            <?php
+            $cidade = new Zend\Form\Element\Text('endereco[' . $count . '][cidade]');
+
+            $cidade->setAttributes(array(
+            'class' => 'form-control cidade',
+            'placeholder'=>'Cidade'));
+
+            $cidade->setValue((isset($arre->cidade)) ? $arre->cidade : '');
+
+            echo $this->formInput($cidade);
+            ?>
+        </div>
+        <div class="form-group col-3">
+            <label>Numero</label>
+            <?php
+            $numero = new Zend\Form\Element\Text('endereco[' . $count . '][numero]');
+
+            $numero->setAttributes(array(
+            'class' => 'form-control cidade',
+            'placeholder'=>'Numero'));
+
+            $numero->setValue((isset($arre->numero)) ? $arre->numero : '');
+
+            echo $this->formInput($numero);
+            ?>
+        </div>
+        <div class="form-group col-3">
+            <label>Complemento</label>
+            <?php
+            $complemento = new Zend\Form\Element\Text('endereco[' . $count . '][complemento]');
+
+            $complemento->setAttributes(array(
+            'class' => 'form-control cidade',
+            'placeholder'=>'Complemento'));
+
+            $complemento->setValue((isset($arre->complemento)) ? $arre->complemento : '');
+
+            echo $this->formInput($complemento);
+            ?>
+        </div>
+    </div>
+</div>
+ <?php
+            $count++;
+        endforeach;
+        ?>

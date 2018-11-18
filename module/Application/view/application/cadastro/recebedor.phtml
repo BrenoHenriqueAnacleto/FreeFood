@@ -1,0 +1,152 @@
+
+<?php
+// This provides a default CSS class and placeholder text for the title element:
+$tipoPessoa = $form->get('tipo_pessoa');
+$tipoPessoa->setAttribute('class', '');
+$tipoPessoa->setAttribute('placeholder', 'Tipo Pessoa');
+
+$nome_fantasia = $form->get('nome_fantasia');
+$nome_fantasia->setAttribute('class', 'form-control');
+$nome_fantasia->setAttribute('placeholder', 'Nome Fantasia');
+
+// This provides a default CSS class and placeholder text for the artist element:
+$senha = $form->get('senha');
+$senha->setAttribute('class', 'form-control');
+$senha->setAttribute('placeholder', 'Senha');
+
+$email = $form->get('email');
+$email->setAttribute('class', 'form-control');
+$email->setAttribute('placeholder', 'Email');
+
+$nome = $form->get('nome');
+$nome->setAttribute('class', 'form-control');
+$nome->setAttribute('placeholder', 'Nome');
+
+$cpf = $form->get('cpf');
+$cpf->setAttribute('class', 'form-control');
+$cpf->setAttribute('placeholder', 'CPF');
+
+$cnpj = $form->get('cnpj');
+$cnpj->setAttribute('class', 'form-control');
+$cnpj->setAttribute('placeholder', 'CNPJ');
+
+$ie = $form->get('ie');
+$ie->setAttribute('class', 'form-control');
+$ie->setAttribute('placeholder', 'Inscrição Estadual');
+
+$rg = $form->get('rg');
+$rg->setAttribute('class', 'form-control');
+$rg->setAttribute('placeholder', 'RG');
+
+$confirmaSenha = $form->get('confirmaSenha');
+$confirmaSenha->setAttribute('class', 'form-control');
+$confirmaSenha->setAttribute('placeholder', 'Confirma senha');
+
+// This provides CSS classes for the submit button:
+$submit = $form->get('submit');
+$submit->setAttribute('class', 'btn btn-primary');
+
+$form->setAttribute('action', $this->url('cadastro', ['action' => 'recebedor']));
+$form->setAttribute('enctype', 'multipart/form-data');
+$form->prepare();
+
+echo $this->form()->openTag($form);
+$dados_endereco = array(
+    'form' => $form,
+    'endereco' => (isset($recibo->endereco) ? $recibo->endereco : array(new \stdClass()))
+);
+?>
+<?php
+// Wrap the elements in divs marked as form groups, and render the
+// label, element, and errors separately within 
+?>
+<div class="message-section">
+    <div class="container margin-50px">
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 wow fadeInDown animated">
+                <div class="col-12 mt-5">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="custom-control custom-radio custom-control-inline col-12">
+                                <?= $this->formLabel($tipoPessoa) ?>
+                                <?= $this->formElement($tipoPessoa) ?>
+                                <?= $this->formElementErrors()->render($tipoPessoa, ['class' => 'help-block']) ?>
+                            </div>
+                            <div class="pessoaFisica">
+                                <div class="row">
+                                    <div class="form-group col-12">
+                                        <?= $this->formLabel($nome) ?>
+                                        <?= $this->formElement($nome) ?>
+                                        <?= $this->formElementErrors()->render($nome, ['class' => 'help-block']) ?>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-6">
+                                        <?= $this->formLabel($cpf) ?>
+                                        <?= $this->formElement($cpf) ?>
+                                        <?= $this->formElementErrors()->render($cpf, ['class' => 'help-block']) ?>
+                                    </div>
+                                    <div class="form-group col-6">
+                                        <?= $this->formLabel($rg) ?>
+                                        <?= $this->formElement($rg) ?>
+                                        <?= $this->formElementErrors()->render($rg, ['class' => 'help-block']) ?>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="pessoaJuridica" style="display: none;">
+                                <div class="row">
+                                    <div class="form-group col-12">
+                                        <div class="form-group">
+                                            <?= $this->formLabel($nome_fantasia) ?>
+                                            <?= $this->formElement($nome_fantasia) ?>
+                                            <?= $this->formElementErrors()->render($nome_fantasia, ['class' => 'help-block']) ?>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-6">
+                                        <?= $this->formLabel($cnpj) ?>
+                                        <?= $this->formElement($cnpj) ?>
+                                        <?= $this->formElementErrors()->render($cnpj, ['class' => 'help-block']) ?>
+                                    </div>
+                                    <div class="form-group col-6">
+                                        <?= $this->formLabel($ie) ?>
+                                        <?= $this->formElement($ie) ?>
+                                        <?= $this->formElementErrors()->render($ie, ['class' => 'help-block']) ?>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="form-group col-6">
+                                    <?= $this->formLabel($senha) ?>
+                                    <?= $this->formElement($senha) ?>
+                                    <?= $this->formElementErrors()->render($senha, ['class' => 'help-block']) ?>
+                                </div>
+                                <div class="form-group col-6">
+                                    <?= $this->formLabel($confirmaSenha) ?>
+                                    <?= $this->formElement($confirmaSenha) ?>
+                                    <?= $this->formElementErrors()->render($confirmaSenha, ['class' => 'help-block']) ?>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <?= $this->formLabel($email) ?>
+                                <?= $this->formElement($email) ?>
+                                <?= $this->formElementErrors()->render($email, ['class' => 'help-block']) ?>
+                            </div>
+
+                            <?php echo $this->partial('Administracao/endereco/index.phtml', $dados_endereco); ?>
+
+                            <?php
+                            echo $this->formSubmit($submit);
+                            echo $this->formHidden($form->get('id'));
+                            echo $this->formHidden($form->get('pessoa_id'));
+                            echo $this->form()->closeTag();
+                            ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

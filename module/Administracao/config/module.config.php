@@ -21,20 +21,36 @@ return [
                     ],
                 ],
             ],
-            'usuario' => [
+            'doador' => [
                 'type'    => Segment::class,
                 'options' => [
-                    'route'       => '/usuario[/:action[/:id]]',
+                    'route'       => '/adm/doador[/:action[/:id]]',
                     'constraints' => [
                         'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
                         'id'     => '[0-9]+',
                     ],
                     'defaults'    => [
-                        'controller' => Controller\UsuarioController::class,
+                        'controller' => Controller\DoadorController::class,
                         'action'     => 'index',
                     ],
                 ],
             ],
+            'recebedor' => [
+                'type'    => Segment::class,
+                'options' => [
+                    'route'       => '/adm/recebedor[/:action[/:id]]',
+                    'constraints' => [
+                        'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                        'id'     => '[0-9]+',
+                    ],
+                    'defaults'    => [
+                        'controller' => Controller\RecebedorController::class,
+                        'action'     => 'index',
+                    ],
+                ],
+            ],
+           
+
             
         ],
     ],

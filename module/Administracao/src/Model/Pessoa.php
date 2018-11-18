@@ -4,38 +4,70 @@ namespace Administracao\Model;
 
 use DomainException;
 use Zend\InputFilter\InputFilter;
-use Zend\InputFilter\InputFilterAwareInterface;
 use Zend\InputFilter\InputFilterInterface;
 
-class Usuario {
+class Pessoa {
 
     private $inputFilter;
     public $id;
-    public $login;
-    public $senha;
     public $email;
+    public $senha;
     public $token;
+    public $status;
+    public $endereco;
+    
+    public function __construct() {
+        
+
+        $this->endereco = array();
+    }
 
     public function exchangeArray(array $data) {
-
+        
         $this->id = !empty($data['id']) ? $data['id'] : null;
-        $this->login = !empty($data['login']) ? $data['login'] : null;
-        $this->senha = !empty($data['senha']) ? $data['senha'] : null;
         $this->email = !empty($data['email']) ? $data['email'] : null;
+        $this->senha = !empty($data['senha']) ? $data['senha'] : null;
         $this->token = !empty($data['token']) ? $data['token'] : null;
+        $this->status = !empty($data['status']) ? $data['status'] : null;
+        $this->endereco = !empty($data['endereco']) ? $data['endereco'] : null;
+        $this->SetaEndereco($data);
+        
+        return $this;
+    }
+    
+    public function SetaEndereco($dados) {
+        
+        if (isset($dados['endereco'])) {
+
+            foreach ($dados['endereco'] as $key => $value) {
+
+                $endereco = new Endereco();
+
+                $endereco->exchangeArray($value);
+
+                $this->endereco[] = $endereco;
+            }
+        }
     }
 
     public function getArrayCopy() {
 
         $data['id'] = $this->id;
-        $data['login'] = $this->login;
-        $data['senha'] = $this->senha;
         $data['email'] = $this->email;
+        $data['senha'] = $this->senha;
         $data['token'] = $this->token;
+        $data['status'] = $this->status;
 
         return $data;
     }
+    public function getArrayCopySingle() {
+        
+        $dados = $this->getArrayCopy();
+        
+        unset($dados['endereco']);
 
+        return $dados;
+    }
     public function setInputFilter(InputFilterInterface $inputFilter) {
         throw new DomainException(sprintf(
                 '%s does not allow injection of an alternate input filter', __CLASS__
@@ -58,7 +90,7 @@ class Usuario {
         ]);
 
         $inputFilter->add([
-            'name' => 'login',
+            'name' => 'email',
             'required' => true,
             'filters' => [
                 ['name' => 'StripTags'],
@@ -77,7 +109,7 @@ class Usuario {
         ]);
 
         $inputFilter->add([
-            'name' => 'email',
+            'name' => 'token',
             'required' => true,
             'filters' => [
                 ['name' => 'StripTags'],
@@ -100,7 +132,12 @@ class Usuario {
         ]);
 
         $inputFilter->add([
-            'name' => 'token',
+            'name' => 'status',
+            'required' => false,
+        ]);
+
+        $inputFilter->add([
+            'name' => 'endereco',
             'required' => false,
         ]);
 

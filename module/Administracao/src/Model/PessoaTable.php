@@ -10,7 +10,7 @@ use Zend\Db\TableGateway\TableGateway;
 use Zend\Paginator\Adapter\DbSelect;
 use Zend\Paginator\Paginator;
 
-class UsuarioTable
+class PessoaTable
 {
     private $tableGateway;
 
@@ -33,9 +33,9 @@ class UsuarioTable
         // Create a new Select object for the table:
         $select = new Select($this->tableGateway->getTable());
 
-        // Create a new result set based on the Usuario entity:
+        // Create a new result set based on the Pessoa entity:
         $resultSetPrototype = new ResultSet();
-        $resultSetPrototype->setArrayObjectPrototype(new Usuario());
+        $resultSetPrototype->setArrayObjectPrototype(new Pessoa());
 
         // Create a new pagination adapter object:
         $paginatorAdapter = new DbSelect(
@@ -52,7 +52,7 @@ class UsuarioTable
         return $paginator;
     }
 
-    public function getUsuario($id)
+    public function getPessoa($id)
     {
         $id     = (int) $id;
         $rowset = $this->tableGateway->select(['id' => $id]);
@@ -67,22 +67,20 @@ class UsuarioTable
         return $row;
     }
 
-    public function saveUsuario(Usuario $usuario)
+    public function savePessoa(Pessoa $pessoa)
     {
-        $data = [
-            'artist' => $usuario->artist,
-            'title'  => $usuario->title,
-        ];
-
-        $id = (int) $usuario->id;
+       
+        $data=$pessoa->getArrayCopySingle();
+//echo '<pre>'; print_r($data); die;
+        $id = (int) $pessoa->id;
 
         if ($id === 0) {
             $this->tableGateway->insert($data);
-
-            return;
+            $id = $this->tableGateway->lastInsertValue;
+            return $id;
         }
 
-        if (!$this->getUsuario($id)) {
+        if (!$this->getPessoa($id)) {
             throw new RuntimeException(sprintf(
                 'Cannot update usuario with identifier %d; does not exist',
                 $id
@@ -90,9 +88,10 @@ class UsuarioTable
         }
 
         $this->tableGateway->update($data, ['id' => $id]);
+        return $id;
     }
 
-    public function deleteUsuario($id)
+    public function deletePessoa($id)
     {
         $this->tableGateway->delete(['id' => (int) $id]);
     }

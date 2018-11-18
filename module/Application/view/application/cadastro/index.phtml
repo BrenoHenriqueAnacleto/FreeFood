@@ -1,0 +1,27 @@
+<div class="news-section">
+    <?php echo $this->flashMessenger()->render('success', ['success', 'alert-success']); ?>
+    <div class="container" style="margin-top: 60px;margin-bottom: 35px;">
+        <div class="row">
+            <div class="col-md-6 news-item">
+                <div class="news-deatils wow fadeInDown animated" data-wow-delay="0.2s">
+                    <div class="col-md-6 thumbnail">
+                        <img src="images/doador.png" width="249" height="272" alt="">
+                    </div>
+                    <div class="col-md-6 content">
+                        <a href="<?php echo $this->url('cadastro', ['action' => 'doador']); ?>" > <p style="font-size: 40px;line-height: 1;text-align: center;">Cadastrar-se como doador</p></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 news-item">
+                <div class="news-deatils wow fadeInDown animated" data-wow-delay="0.5s">
+                    <div class="col-md-6 thumbnail">
+                        <img src="images/recebedor.png" width="249" height="272" alt="">
+                    </div>
+                    <div class="col-md-6 content">
+                        <a href="<?php echo $this->url('cadastro', ['action' => 'recebedor']); ?>" ><p style="font-size: 40px;line-height: 1;text-align: center;">Cadastrar-se como recebedor</p></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

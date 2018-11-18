@@ -1,6 +1,6 @@
 <?php
 
-namespace Album\Model;
+namespace Administracao\Model;
 
 use RuntimeException;
 use Zend\Db\TableGateway\TableGatewayInterface;
@@ -10,7 +10,7 @@ use Zend\Db\TableGateway\TableGateway;
 use Zend\Paginator\Adapter\DbSelect;
 use Zend\Paginator\Paginator;
 
-class AlbumTable
+class PessoaJuridicaTable
 {
     private $tableGateway;
 
@@ -33,9 +33,9 @@ class AlbumTable
         // Create a new Select object for the table:
         $select = new Select($this->tableGateway->getTable());
 
-        // Create a new result set based on the Album entity:
+        // Create a new result set based on the PessoaJuridica entity:
         $resultSetPrototype = new ResultSet();
-        $resultSetPrototype->setArrayObjectPrototype(new Album());
+        $resultSetPrototype->setArrayObjectPrototype(new PessoaJuridica());
 
         // Create a new pagination adapter object:
         $paginatorAdapter = new DbSelect(
@@ -52,10 +52,10 @@ class AlbumTable
         return $paginator;
     }
 
-    public function getAlbum($id)
+    public function getPessoaJuridica($id)
     {
         $id     = (int) $id;
-        $rowset = $this->tableGateway->select(['id' => $id]);
+        $rowset = $this->tableGateway->select(['usuario_id' => $id]);
         $row    = $rowset->current();
         if (!$row) {
             throw new RuntimeException(sprintf(
@@ -67,33 +67,32 @@ class AlbumTable
         return $row;
     }
 
-    public function saveAlbum(Album $album)
+    public function savePessoaJuridica(PessoaJuridica $pessoaJuridica)
     {
-        $data = [
-            'artist' => $album->artist,
-            'title'  => $album->title,
-        ];
-
-        $id = (int) $album->id;
+       
+        $data=$pessoaJuridica->getArrayCopySingle();
+//echo '<pre>'; print_r($data); die;
+        $id = (int) $pessoaJuridica->pessoa_id;
 
         if ($id === 0) {
             $this->tableGateway->insert($data);
-
-            return;
+            $id = $this->tableGateway->lastInsertValue;
+            return $id;
         }
 
-        if (!$this->getAlbum($id)) {
+        if (!$this->getPessoaJuridica($id)) {
             throw new RuntimeException(sprintf(
-                'Cannot update album with identifier %d; does not exist',
+                'Cannot update usuario with identifier %d; does not exist',
                 $id
             ));
         }
 
-        $this->tableGateway->update($data, ['id' => $id]);
+        $this->tableGateway->update($data, ['pessoa_id' => $id]);
+        return $id;
     }
 
-    public function deleteAlbum($id)
+    public function deletePessoaJuridica($id)
     {
-        $this->tableGateway->delete(['id' => (int) $id]);
+        $this->tableGateway->delete(['pessoa_id' => (int) $id]);
     }
 }

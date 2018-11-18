@@ -1,0 +1,44 @@
+<?php
+$title = 'Recebedores';
+$this->headTitle($title);
+?>
+<div class="card" style="margin-top: 10px;">
+    <div class="card-header" style="background: #303641;color:white;">
+        <h1><?= $this->escapeHtml($title); ?></h1>
+        <p>
+            <a class="btn btn-flat btn-success mb-3" href="<?= $this->url('recebedor', ['action' => 'add']) ?>">Novo Recebedor</a>
+        </p>
+    </div>
+    <div class="card-body">
+        <table class="table">
+            <tr>
+                <th>Nome</th>
+                <th>Email</th>
+                <th>&nbsp;</th>
+            </tr>
+            <?php foreach ($this->paginator as $recebedor) : // <-- change here! ?>
+                <tr>
+                    <td><?= $this->escapeHtml($recebedor->nome) ?></td>
+                    <td><?= $this->escapeHtml($recebedor->email) ?></td>
+                    <td>
+                        <a href="<?= $this->url('recebedor', ['action' => 'edit', 'id' => $recebedor->id]) ?>">Edit</a>
+                        <a href="<?= $this->url('recebedor', ['action' => 'delete', 'id' => $recebedor->id]) ?>">Delete</a>
+                    </td>
+                </tr>
+            <?php endforeach; ?>
+        </table>
+    </div>
+</div>
+
+<?=
+$this->paginationControl(
+// The paginator object:
+        $this->paginator,
+        // The scrolling style:
+        'sliding',
+        // The partial to use to render the control:
+        'partial/paginator',
+        // The route to link to when a user clicks a control link:
+        ['route' => 'recebedor']
+);
+?>
