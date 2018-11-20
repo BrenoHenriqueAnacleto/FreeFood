@@ -49,6 +49,20 @@ return [
                     ],
                 ],
             ],
+            'doacao' => [
+                'type'    => Segment::class,
+                'options' => [
+                    'route'       => '/adm/doacao[/:action[/:id]]',
+                    'constraints' => [
+                        'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                        'id'     => '[0-9]+',
+                    ],
+                    'defaults'    => [
+                        'controller' => Controller\DoacaoController::class,
+                        'action'     => 'index',
+                    ],
+                ],
+            ],
            
 
             

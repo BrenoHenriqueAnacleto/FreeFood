@@ -15,7 +15,7 @@ namespace Administracao\Form;
  */
 class DoacaoForm extends \Zend\Form\Form {
 
-    public function __construct($name = null,$doadores=[],$recebedores=[]) {
+    public function __construct($doadores=[],$recebedores=[]) {
         // We will ignore the name provided to the constructor
         parent::__construct('doacao');
 
@@ -23,12 +23,8 @@ class DoacaoForm extends \Zend\Form\Form {
             'name' => 'id',
             'type' => 'hidden',
         ]);
-        $this->add([
-            'name' => 'doadores',
-            'type' => 'hidden',
-        ]);
         $this->add(array(
-            'name' => 'doador',
+            'name' => 'doadores',
             'type' => 'Zend\Form\Element\Select',
             'options' => array(
                 'label' => 'Doador',
@@ -36,17 +32,13 @@ class DoacaoForm extends \Zend\Form\Form {
             )
         ));
         $this->add(array(
-            'name' => 'recebedor',
+            'name' => 'recebedores',
             'type' => 'Zend\Form\Element\Select',
             'options' => array(
                 'label' => 'Recebedor',
                 'value_options' => $recebedores
             )
         ));
-        $this->add([
-            'name' => 'recebedores',
-            'type' => 'hidden',
-        ]);
         $this->add([
             'name' => 'descricao',
             'type' => 'text',

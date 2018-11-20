@@ -43,9 +43,9 @@ class Doacao{
 
     public function SetaItens($dados) {
 
-        if (isset($dados['itens'])) {
+        if (isset($dados['item'])) {
 
-            foreach ($dados['itens'] as $key => $value) {
+            foreach ($dados['item'] as $key => $value) {
 
                 $item = new Item();
 
@@ -111,7 +111,7 @@ class Doacao{
             'name' => 'doador_id',
             'required' => false,
         ));
-
+        
         $this->inputFilter = $inputFilter;
 
         return $this->inputFilter;

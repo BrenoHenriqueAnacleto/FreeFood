@@ -13,6 +13,10 @@ use Administracao\Controller\Factory\DoadorControllerFactory;
 use Administracao\Controller\DoadorController;
 use Administracao\Controller\Factory\RecebedorControllerFactory;
 use Administracao\Controller\RecebedorController;
+use Administracao\Controller\Factory\DoacaoControllerFactory;
+use Administracao\Controller\DoacaoController;
+use Administracao\Model\Factory\DoacaoTableFactory;
+use Administracao\Model\Factory\DoacaoTableGatewayFactory;
 use Administracao\Model\Factory\DoadorTableFactory;
 use Administracao\Model\Factory\DoadorTableGatewayFactory;
 use Administracao\Model\Factory\RecebedorTableFactory;
@@ -76,8 +80,22 @@ class Module implements ConfigProviderInterface, ServiceProviderInterface, Contr
 
                     return new TableGateway('endereco', $dbAdapter, null, $resultSetPrototype);
                 },
-                Model\RecebedorTable::class =>  RecebedorTableFactory::class,
-                Model\RecebedorTableGateway::class=> RecebedorTableGatewayFactory::class,
+                Model\ItemTable::class => function ($container) {
+                $tableGateway = $container->get('Model\ItemTableGateway');
+
+                return new Model\ItemTable($tableGateway);
+                },
+                'Model\ItemTableGateway' => function ($container) {
+                    $dbAdapter = $container->get(AdapterInterface::class);
+                    $resultSetPrototype = new ResultSet();
+                    $resultSetPrototype->setArrayObjectPrototype(new Model\Item());
+
+                    return new TableGateway('item', $dbAdapter, null, $resultSetPrototype);
+                },
+                Model\RecebedorTable::class => RecebedorTableFactory::class,
+                Model\RecebedorTableGateway::class => RecebedorTableGatewayFactory::class,
+                Model\DoacaoTable::class => DoacaoTableFactory::class,
+                Model\DoacaoTableGateway::class => DoacaoTableGatewayFactory::class,
             ],
         ];
     }
@@ -94,6 +112,7 @@ class Module implements ConfigProviderInterface, ServiceProviderInterface, Contr
                     return new Controller\IndexController();
                 },
                 RecebedorController::class => RecebedorControllerFactory::class,
+                DoacaoController::class => DoacaoControllerFactory::class,
             ],
         ];
     }

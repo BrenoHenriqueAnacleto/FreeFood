@@ -96,5 +96,38 @@ class RecebedorTable {
     public function deleteRecebedor($id) {
         $this->tableGateway->delete(['id' => (int) $id]);
     }
+  public function getRecebedores() {
+        $adapter = $this->tableGateway->getAdapter();
 
+        $sql = new \Zend\Db\Sql\Sql($adapter);
+
+        $select = new \Zend\Db\Sql\Select(array('d' => 'recebedor'));
+        $select->columns(array('*'));
+        $select->join(array('pe' => 'pessoa'), 'd.pessoa_id = pe.id', array(
+            'email' => 'email',
+                ), 'LEFT');
+
+        $select->join(array('pef' => 'pessoa_fisica'), 'pef.pessoa_id = pe.id', array(
+            'nome' => 'nome',
+            'cpf' => 'cpf',
+            'rg' => 'rg'
+                ), 'LEFT');
+        $select->join(array('pej' => 'pessoa_juridica'), 'pej.pessoa_id = pe.id', array(
+            'ie' => 'ie',
+            'cnpj' => 'cnpj',
+            'nome_fantasia' => 'nome_fantasia'
+                ), 'LEFT');
+        $select->group('id');
+
+        $resultado = $this->tableGateway->selectWith($select)->toArray();
+
+        $doadores = array();
+
+        foreach ($resultado as $r) {
+
+            $doadores[$r['id']] = $r['id'];
+        }
+
+        return $doadores;
+    }
 }

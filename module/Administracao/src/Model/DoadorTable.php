@@ -13,9 +13,11 @@ use Zend\Paginator\Paginator;
 class DoadorTable {
 
     private $tableGateway;
+    public $pessoaTable;
 
-    public function __construct(TableGatewayInterface $tableGateway) {
+    public function __construct(TableGatewayInterface $tableGateway, \Administracao\Model\PessoaTable $pessoaTable) {
         $this->tableGateway = $tableGateway;
+        $this->pessoaTable = $pessoaTable;
     }
 
     public function fetchAll($paginated = false) {
@@ -62,11 +64,11 @@ class DoadorTable {
     }
 
     public function getDoador($id) {
-        
+
         $adapter = $this->tableGateway->getAdapter();
-        
+
         $sql = new \Zend\Db\Sql\Sql($adapter);
-        
+
         $id = (int) $id;
         $where = new \Zend\Db\Sql\Where();
         $select = new \Zend\Db\Sql\Select(array('d' => 'doador'));
@@ -96,20 +98,19 @@ class DoadorTable {
         $where->equalTo('d.id', $id);
         $select->where($where);
 
-         $selectString = $sql->getSqlStringForSqlObject($select); 
-        
+        $selectString = $sql->getSqlStringForSqlObject($select);
+
         // Executa a consulta
         $resultado = $adapter->query($selectString, \Zend\Db\Adapter\Adapter::QUERY_MODE_EXECUTE);
-        
-        if($resultado->Count() > 0 ) {
-            
+
+        if ($resultado->Count() > 0) {
+
             return $resultado->Current();
             //return $rowset->Current();
         }
-        
+
         return NULL;
     }
-    
 
     public function saveDoador(Doador $doador) {
         $data = $doador->getArrayCopy();
@@ -118,8 +119,8 @@ class DoadorTable {
 
         if ($id === 0) {
             $this->tableGateway->insert($data);
-
-            return;
+            $id = $this->tableGateway->lastInsertValue;
+            return $id;
         }
 
         if (!$this->getDoador($id)) {
@@ -133,6 +134,36 @@ class DoadorTable {
 
     public function deleteDoador($id) {
         $this->tableGateway->delete(['id' => (int) $id]);
+    }
+
+    public function getDoadores() {
+
+        $select = new \Zend\Db\Sql\Select(array('d' => 'doador'));
+        $select->columns(array('*'));
+        $select->join(array('pe' => 'pessoa'), 'd.pessoa_id = pe.id', array(
+                ), 'LEFT');
+
+        $select->join(array('pef' => 'pessoa_fisica'), 'pef.pessoa_id = pe.id', array(
+            'nome' => 'nome',
+                ), 'LEFT');
+        $select->join(array('pej' => 'pessoa_juridica'), 'pej.pessoa_id = pe.id', array(
+            'ie' => 'ie',
+            'cnpj' => 'cnpj',
+            'nome_fantasia' => 'nome_fantasia'
+                ), 'LEFT');
+        $select->group('id');
+
+        $resultado = $this->tableGateway->selectWith($select)->toArray();
+
+
+        $doadores = array();
+//        echo '<pre>';        print_r($resultado); die;
+        foreach ($resultado as $r) {
+
+            $doadores[$r['id']] = $r['id'];
+        }
+
+        return $doadores;
     }
 
 }

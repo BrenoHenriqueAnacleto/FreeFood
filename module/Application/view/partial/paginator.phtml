@@ -1,50 +1,59 @@
 <?php if ($this->pageCount): ?>
-    <div>
-        <ul class="pagination">
-            <!-- Previous page link -->
-            <?php if (isset($this->previous)): ?>
-                <li>
-                    <a href="<?= $this->url($this->route, [], ['query' => ['page' => $this->previous]]) ?>">
-                        &lt;&lt;
-                    </a>
-                </li>
-            <?php else: ?>
-                <li class="disabled">
-                    <a href="#">
-                        &lt;&lt;
-                    </a>
-                </li>
-            <?php endif ?>
+<div class="row" style="margin-top: 10px;">
+        <div class="col-sm-12 col-md-5">
+            <div class="dataTables_info" id="dataTable3_info" role="status" aria-live="polite">
+                <ul class="pagination">
+                    <!-- Previous page link -->
+                    <?php if (isset($this->previous)): ?>
+                        <li class="paginate_button page-item previous disabled" id="dataTable3_previous">
+                            <a href="<?= $this->url($this->route, [], ['query' => ['page' => $this->previous]]) ?>" aria-controls="dataTable3" data-dt-idx="0" tabindex="0" class="page-link">
+                                Anterior
+                            </a>
+                        </li>
 
-            <!-- Numbered page links -->
-            <?php foreach ($this->pagesInRange as $page): ?>
-                <?php if ($page !== $this->current): ?>
-                    <li>
-                        <a href="<?= $this->url($this->route, [], ['query' => ['page' => $page]]) ?>">
-                            <?= $page; ?>
-                        </a>
-                    </li>
-                <?php else: ?>
-                    <li class="active">
-                        <a href="#"><?= $page; ?></a>
-                    </li>
-                <?php endif ?>
-            <?php endforeach ?>
+                    <?php else: ?>
+                       <li class="paginate_button page-item previous disabled" id="dataTable3_previous">
+                            <a href="<?= $this->url($this->route, [], ['query' => ['page' => $this->previous]]) ?>" aria-controls="dataTable3" data-dt-idx="0" tabindex="0" class="page-link">
+                                Anterior
+                            </a>
+                        </li>
+                    <?php endif ?>
 
-            <!-- Next page link -->
-            <?php if (isset($this->next)): ?>
-                <li>
-                    <a href="<?= $this->url($this->route, [], ['query' => ['page' => $this->next]]) ?>">
-                        &gt;&gt;
-                    </a>
-                </li>
-            <?php else: ?>
-                <li class="disabled">
-                    <a href="#">
-                        &gt;&gt;
-                    </a>
-                </li>
-            <?php endif ?>
-        </ul>
+                    <!-- Numbered page links -->
+                    <?php foreach ($this->pagesInRange as $page): ?>
+                        <?php if ($page !== $this->current): ?>
+                            <li class="paginate_button page-item">
+                                <a href="<?= $this->url($this->route, [], ['query' => ['page' => $page]]) ?>" aria-controls="dataTable3" data-dt-idx="1" tabindex="0" class="page-link">
+                                    <?= $page; ?>
+                                </a>
+                            </li>
+                        <?php else: ?>
+                            <li class="paginate_button page-item active">
+                                <a href="#" aria-controls="dataTable3" data-dt-idx="1" tabindex="0" class="page-link">
+                                    <?= $page; ?>
+                                </a>
+                            </li>
+                        <?php endif ?>
+                    <?php endforeach ?>
+
+                    <!-- Next page link -->
+                    <?php if (isset($this->next)): ?>
+                        <li class="paginate_button page-item next" id="dataTable3_next">
+                            <a href="<?= $this->url($this->route, [], ['query' => ['page' => $this->next]]) ?>" aria-controls="dataTable3" data-dt-idx="3" tabindex="0" class="page-link">
+                            Proximo
+                            </a>
+                        </li>
+                    <?php else: ?>
+                        <li class="paginate_button page-item next" id="dataTable3_next">
+                            <a href="<?= $this->url($this->route, [], ['query' => ['page' => $this->next]]) ?>" aria-controls="dataTable3" data-dt-idx="3" tabindex="0" class="page-link">
+                            Proximo
+                            </a>
+                        </li>
+                    <?php endif ?>
+                </ul>
+            </div>
+        </div>
     </div>
-<?php endif ?>
+    <?php
+
+ endif ?>

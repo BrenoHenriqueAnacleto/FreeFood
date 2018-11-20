@@ -20,14 +20,16 @@ class Item {
     public $descricao;
     public $quantidade;
     public $valor_unitario;
+    public $doacao_id;
     
     public function exchangeArray(array $data) {
-        
+        error_log(json_encode($data));
         $this->id             = !empty($data['id'])             ? $data['id']             : null;
         $this->nome           = !empty($data['nome'])           ? $data['nome']           : null;
         $this->descricao      = !empty($data['descricao'])      ? $data['descricao']      : null;
         $this->quantidade     = !empty($data['quantidade'])     ? $data['quantidade']     : null;
         $this->valor_unitario = !empty($data['valor_unitario']) ? $data['valor_unitario'] : null;
+        $this->doacao_id      = !empty($data['doacao_id'])      ? $data['doacao_id'] : null;
        
         return $this;
     }
@@ -39,7 +41,7 @@ class Item {
         $data['descricao']      = $this->descricao;
         $data['quantidade']     = $this->quantidade;
         $data['valor_unitario'] = $this->valor_unitario;
-
+        $data['doacao_id']      = $this->doacao_id;
         return $data;
     }
         public function setInputFilter(InputFilterInterface $inputFilter) {
@@ -80,6 +82,10 @@ class Item {
 
         $inputFilter->add([
             'name' => 'valor_unitario',
+            'required' => false,
+        ]);
+        $inputFilter->add([
+            'name' => 'doacao_id',
             'required' => false,
         ]);
 
