@@ -165,5 +165,16 @@ class DoadorTable {
 
         return $doadores;
     }
+    
+    public function getDoadorPorPessoaId($id) {
+        $id = (int) $id;
+        $rowset = $this->tableGateway->select(['pessoa_id' => $id]);
+        $row = $rowset->current();
+        if (!$row) {
+            return false;
+        }
+
+        return $row;
+    }
 
 }

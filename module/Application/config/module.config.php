@@ -36,15 +36,47 @@ return [
                 ],
             ],
             'login' => [
+                'type' => Literal::class,
+                'options' => [
+                    'route' => '/auth/login',
+                    'defaults' => [
+                        'controller' => Controller\AuthController::class,
+                        'action' => 'login',
+                    ],
+                ],
+            ],
+            'logout' => [
+                'type' => Literal::class,
+                'options' => [
+                    'route' => '/auth/logout',
+                    'defaults' => [
+                        'controller' => Controller\AuthController::class,
+                        'action' => 'logout',
+                    ],
+                ],
+            ],
+             'contato' => [
                 'type' => Segment::class,
                 'options' => [
-                    'route' => '/application/login[/:action[/:id]]',
+                    'route' => '/contato[/:action[/:id]]',
                     'constraints' => [
                         'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
                         'id' => '[0-9]+',
+                    ],'defaults' => [
+                        'controller' => Controller\ContatoController::class,
+                        'action' => 'index',
                     ],
-                    'defaults' => [
-                        'controller' => Controller\LoginController::class,
+                ],
+            ],
+             'minha-conta' => [
+                'type' => Segment::class,
+                'options' => [
+                    'route' => '/minha-conta[/:action[/:id]]',
+                    'constraints' => [
+                        'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                        'id' => '[0-9]+',
+                    ],'defaults' => [
+                        'controller' => Controller\MinhaContaController::class,
                         'action' => 'index',
                     ],
                 ],
@@ -69,6 +101,7 @@ return [
         'factories' => [
             Controller\IndexController::class => InvokableFactory::class,
             Controller\LoginController::class => InvokableFactory::class,
+            Controller\ContatoController::class => InvokableFactory::class,
         ],
     ],
     'navigation' => [

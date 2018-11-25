@@ -22,19 +22,25 @@
         "zendframework/zend-paginator": "^2.7",
         "zendframework/zend-modulemanager": "^2.7",
         "zendframework/zend-inputfilter": "^2.7",
-        "zendframework/zend-mvc-plugin-flashmessenger": "^1.1"
+        "zendframework/zend-mvc-plugin-flashmessenger": "^1.1",
+        "zendframework/zend-authentication": "^2.6",
+        "zendframework/zend-crypt": "^3.3",
+        "zendframework/zend-mvc-i18n": "^1.1",
+        "zendframework/zend-mail": "^2.10"
     },
     "autoload": {
         "psr-4": {
             "Application\\": "module/Application/src/",
             "Album\\": "module/Album/src/",
-            "Administracao\\": "module/Administracao/src/"
+            "Administracao\\": "module/Administracao/src/",
+            "User\\": "module/Administracao/src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
             "ApplicationTest\\": "module/Application/test/",
-            "AlbumTest\\": "module/Album/test/"
+            "AlbumTest\\": "module/Album/test/",
+            "UserTest\\": "module/User/test/"
         }
     },
     "extra": [],

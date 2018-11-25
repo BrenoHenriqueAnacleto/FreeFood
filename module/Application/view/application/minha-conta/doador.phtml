@@ -1,0 +1,19 @@
+
+<div class="table-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h2 class="section-title">Doações pendentes</h2>
+            </div>
+        </div>
+        <?php foreach ($doacoes as $doacao): ?>
+        <div class="col-md-4" style="margin-top: 50px;">
+                    <div class="table-item sliver">
+                        <h3 style="text-transform: uppercase;"><?php echo $doacao->titulo?></h3>
+                        <p><?php echo $doacao->descricao?></p>
+                        <a href="<?php echo $this->url('minha-conta', ['action' => 'doar','id' => $doacao->id]);?>">Doar</a>
+                    </div>
+                </div>
+        <?php endforeach; ?>
+    </div>
+</div>

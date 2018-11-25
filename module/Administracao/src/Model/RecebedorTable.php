@@ -72,6 +72,17 @@ class RecebedorTable {
 
         return $row;
     }
+    
+    public function getRecebedorPorPessoaId($id) {
+        $id = (int) $id;
+        $rowset = $this->tableGateway->select(['pessoa_id' => $id]);
+        $row = $rowset->current();
+        if (!$row) {
+            return false;
+        }
+
+        return $row;
+    }
 
     public function saveRecebedor(Recebedor $recebedor) {
         $data = $recebedor->getArrayCopy();

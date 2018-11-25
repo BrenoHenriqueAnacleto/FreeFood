@@ -16,28 +16,26 @@ use Administracao\Model\Doacao;
 use Administracao\Model\Item;
 use Administracao\Form\DoacaoForm;
 use Zend\View\Model\ViewModel;
-class DoacaoController extends \Zend\Mvc\Controller\AbstractActionController{
-    
+
+class DoacaoController extends \Zend\Mvc\Controller\AbstractActionController {
+
     public $recebedorTable;
     public $doadorTable;
     public $doacaoTable;
     public $itemTable;
 
+    public function __construct(DoacaoTable $doacaoTable, DoadorTable $doadorTable, RecebedorTable $recebedorTable, ItemTable $itemTable) {
 
-    public function __construct(DoacaoTable $doacaoTable,DoadorTable $doadorTable,RecebedorTable $recebedorTable,ItemTable $itemTable) {
-        
-        $this->doacaoTable=$doacaoTable;
-        $this->doadorTable=$doadorTable;
-        $this->recebedorTable=$recebedorTable;
-        $this->itemTable=$itemTable;
+        $this->doacaoTable = $doacaoTable;
+        $this->doadorTable = $doadorTable;
+        $this->recebedorTable = $recebedorTable;
+        $this->itemTable = $itemTable;
     }
 
-
-    public function indexAction()
-    {
+    public function indexAction() {
         // Grab the paginator from the DoadorTable:
         $paginator = $this->doacaoTable->fetchAll(true);
-        
+
 
         // Set the current page to what has been passed in query string,
         // or to 1 if none is set, or the page is invalid:
@@ -50,12 +48,11 @@ class DoacaoController extends \Zend\Mvc\Controller\AbstractActionController{
 //        echo '<pre>';        print_r($paginator); die;
         return new ViewModel(['paginator' => $paginator]);
     }
-    
-    public function addAction()
-    {
-        $doadores= $this->doadorTable->getDoadores();
-        $recebedores =$this->recebedorTable->getRecebedores();
-        $form = new DoacaoForm($doadores,$recebedores);
+
+    public function addAction() {
+        $doadores = $this->doadorTable->getDoadores();
+        $recebedores = $this->recebedorTable->getRecebedores();
+        $form = new DoacaoForm($doadores, $recebedores);
         $form->get('submit')->setValue('Salvar');
 
         $request = $this->getRequest();
@@ -63,7 +60,7 @@ class DoacaoController extends \Zend\Mvc\Controller\AbstractActionController{
         if (!$request->isPost()) {
             return ['form' => $form];
         }
-        
+
         $doacao = new Doacao();
         $form->setInputFilter($doacao->getInputFilter());
         $form->setData($request->getPost());
@@ -73,25 +70,44 @@ class DoacaoController extends \Zend\Mvc\Controller\AbstractActionController{
             return ['form' => $form];
         }
 //        $item = new Item();
-        
-        $post=$request->getPost()->getArrayCopy();
-        
+
+        $post = $request->getPost()->getArrayCopy();
+
 //        $item->exchangeArray($post);
-        
+
         $doacao->exchangeArray($post);
 //        echo '<pre>'; print_r($doacao); die;
-        $id=$this->doacaoTable->saveDoacao($doacao);
-        
-        if($id){
+        $id = $this->doacaoTable->saveDoacao($doacao);
+
+        if ($id) {
 //            
-            foreach ($doacao->itens as $item){
-                $item->doacao_id=$id;
+            foreach ($doacao->itens as $item) {
+                $item->doacao_id = $id;
             }
 //            echo '<pre>'; print_r($doacao); die;
             $this->itemTable->SalvarItemDoacao($doacao);
         }
 
         return $this->redirect()->toRoute('doacao');
+    }
+
+    public function editAction() {
+        
+        $id = $this->params()->fromRoute("id", null);
+        $form = new DoacaoForm();
+        $form->get('submit')->setValue('Salvar');
+
+        if ($id) {
+            try {
+                $doacao = $this->doacaoTable->getDoacao($id);
+            } catch (\Exception $e) {
+                return $this->redirect()->toRoute('minha-conta', ['action' => 'index']);
+            }
+        }
+        $form->bind($doacao);
+//        echo '<pre>';        print_r($doacao); die;
+        $viewData = ['id' => $id, 'form' => $form, 'recibo' => $doacao];
+        return new ViewModel($viewData);
     }
 
 }

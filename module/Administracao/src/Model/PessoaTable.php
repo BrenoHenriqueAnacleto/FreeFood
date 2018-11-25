@@ -66,12 +66,25 @@ class PessoaTable
 
         return $row;
     }
+     public function getPessoaPorEmail($email)
+    {
+        $rowset = $this->tableGateway->select(['email' => $email]);
+        $row    = $rowset->current();
+        if (!$row) {
+            throw new RuntimeException(sprintf(
+                'Could not find row with identifier %d',
+                $email
+            ));
+        }
+
+        return $row;
+    }
 
     public function savePessoa(Pessoa $pessoa)
     {
        
         $data=$pessoa->getArrayCopySingle();
-//echo '<pre>'; print_r($data); die;
+        
         $id = (int) $pessoa->id;
 
         if ($id === 0) {

@@ -670,7 +670,7 @@ i.fa.fa-quote-left {
 TABLE SECTION
 */
 .table-section {
-    background: url(../image/table-bg.png) no-repeat;
+    background: url(../image/table-bg.jpg) no-repeat;
     background-size: cover;
     display: block;
     text-align: center;
@@ -983,5 +983,9 @@ RESPONSIVE
         margin-bottom: 40px;
     }
 
+    .custom-section{
+        margin:30%;
+        
+    }
 
 }

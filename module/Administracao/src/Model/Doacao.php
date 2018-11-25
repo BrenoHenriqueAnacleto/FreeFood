@@ -21,6 +21,7 @@ class Doacao{
     public $descricao;
     public $recebedor_id;
     public $doador_id;
+    public $status;
     public $itens;
    
     public function __construct() {
@@ -35,6 +36,7 @@ class Doacao{
         $this->recebedor_id  = (!empty($dados['recebedor_id']))  ? $dados['recebedor_id']          : null;
         $this->titulo        = (!empty($dados['titulo']))        ? $dados['titulo']                : null;
         $this->descricao     = (!empty($dados['descricao']))     ? strip_tags($dados['descricao']) : null;
+        $this->status        = (!empty($dados['status']))        ? strip_tags($dados['status'])    : null;
 
         $this->SetaItens($dados);
 
@@ -62,6 +64,7 @@ class Doacao{
             'descricao'    => $this->descricao,
             'recebedor_id' => $this->recebedor_id,
             'doador_id'    => $this->doador_id,
+            'status'       => $this->status
         ];
 
         if (!is_null($this->id)) {
@@ -109,6 +112,10 @@ class Doacao{
         ));
         $inputFilter->add(array(
             'name' => 'doador_id',
+            'required' => false,
+        ));
+        $inputFilter->add(array(
+            'name' => 'status',
             'required' => false,
         ));
         

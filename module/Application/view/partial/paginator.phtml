@@ -5,7 +5,7 @@
                 <ul class="pagination">
                     <!-- Previous page link -->
                     <?php if (isset($this->previous)): ?>
-                        <li class="paginate_button page-item previous disabled" id="dataTable3_previous">
+                        <li class="paginate_button page-item previous" id="dataTable3_previous">
                             <a href="<?= $this->url($this->route, [], ['query' => ['page' => $this->previous]]) ?>" aria-controls="dataTable3" data-dt-idx="0" tabindex="0" class="page-link">
                                 Anterior
                             </a>
@@ -44,7 +44,7 @@
                             </a>
                         </li>
                     <?php else: ?>
-                        <li class="paginate_button page-item next" id="dataTable3_next">
+                        <li class="paginate_button page-item disabled" id="dataTable3_next">
                             <a href="<?= $this->url($this->route, [], ['query' => ['page' => $this->next]]) ?>" aria-controls="dataTable3" data-dt-idx="3" tabindex="0" class="page-link">
                             Proximo
                             </a>
