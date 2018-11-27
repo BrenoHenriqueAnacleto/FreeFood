@@ -1,16 +1,16 @@
 /*	################################################################
-	File Name: style.css
-	Template Name: Beauty Spa
-	Created By: Shah Zobayer Ahmed
-	http://zobayer.com
+        File Name: style.css
+        Template Name: Beauty Spa
+        Created By: Shah Zobayer Ahmed
+        http://zobayer.com
 
-	1) GENERAL STRUCTURES
-	2) HEADER SECTION
-	3) ABOUT SECTION
-	4) NEWS LATTER SECTION
-	5) CONTACT SECTION
-	6) FOOTER SECTION
-	7) RESPONSIVE STRUCTURES
+        1) GENERAL STRUCTURES
+        2) HEADER SECTION
+        3) ABOUT SECTION
+        4) NEWS LATTER SECTION
+        5) CONTACT SECTION
+        6) FOOTER SECTION
+        7) RESPONSIVE STRUCTURES
 ################################################################# */
 /* *******************
  * 1. GENERAL SECTION
@@ -279,7 +279,7 @@ i.fa.fa-shopping-cart {
 
 /*
 Purilfy section
- */
+*/
 .purilfy-section {
     color: #fff;
     background: #f3392f;
@@ -310,7 +310,7 @@ Purilfy section
 
 /*
 OFFER SECTION
- */
+*/
 .offer-section {
     padding: 110px 0;
     display: block;
@@ -433,7 +433,7 @@ OFFER SECTION
 
 /*
 MESSAGE SECTION
- */
+*/
 .message-section {
     padding: 75px 0;
     text-align: center;
@@ -511,7 +511,7 @@ MESSAGE SECTION
 
 /*
 CLIENT SECTION
- */
+*/
 .client-section {
     text-align: center;
     display: block;
@@ -678,7 +678,8 @@ TABLE SECTION
 }
 
 .table-section .section-title{
-    color: #fff;
+    color: black;
+    background-color: white;
     font-weight: 700;
     font-size: 34px;
     font-family:'ProximaNovaA-Bold';
@@ -707,6 +708,7 @@ TABLE SECTION
 }
 
 .sliver {
+    box-shadow: 10px 8px 12px;
 }
 
 .table-item > h2 {
@@ -743,7 +745,7 @@ TABLE SECTION
 }
 
 .sliver > h3 {
-    color: #45c9eb
+    color: gold
 }
 
 .table-item > ul {
@@ -760,7 +762,7 @@ TABLE SECTION
 }
 
 .sliver > a {
-    background: #45c9eb
+    background: gold
 }
 
 .gold > h3 {
@@ -844,7 +846,7 @@ FOOTER SECTION
 .copyright ul li{ }
 .copyright ul li a{
     color: #474747 !important;
- }
+}
 
 .copyright ul li a:hover{
     background: transparent !important
@@ -985,7 +987,12 @@ RESPONSIVE
 
     .custom-section{
         margin:30%;
-        
+
     }
 
+}
+.remover-solicitacao{
+    background-color:transparent !important;
+    color: #f3392f;
+    font-size: 25px;
 }

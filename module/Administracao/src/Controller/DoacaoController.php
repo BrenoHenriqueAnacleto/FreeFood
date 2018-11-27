@@ -109,5 +109,30 @@ class DoacaoController extends \Zend\Mvc\Controller\AbstractActionController {
         $viewData = ['id' => $id, 'form' => $form, 'recibo' => $doacao];
         return new ViewModel($viewData);
     }
+    public function deleteAction()
+    {
+        $id = (int) $this->params()->fromRoute('id', 0);
+        if (!$id) {
+            return $this->redirect()->toRoute('doacao');
+        }
+
+        $request = $this->getRequest();
+        if ($request->isPost()) {
+            $del = $request->getPost('del', 'No');
+
+            if ($del == 'Yes') {
+                $id = (int) $request->getPost('id');
+                $this->doacaoTable->deleteDoacao($id);
+            }
+
+            // Redirect to list of doacaos
+            return $this->redirect()->toRoute('doacao');
+        }
+
+        return [
+            'id'    => $id,
+            'doacao' => $this->doacaoTable->getDoacao($id),
+        ];
+    }
 
 }

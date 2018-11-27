@@ -11,6 +11,7 @@ namespace Application\Form;
  *
  * @author breno
  */
+
 class CadastroForm extends \Zend\Form\Form {
     
     public function __construct($name = null) {
@@ -27,14 +28,14 @@ class CadastroForm extends \Zend\Form\Form {
         ]);
         $this->add([
             'name' => 'senha',
-            'type' => 'text',
+            'type' => 'password',
             'options' => [
                 'label' => 'Senha',
             ],
         ]);
         $this->add([
             'name' => 'confirmaSenha',
-            'type' => 'text',
+            'type' => 'password',
             'options' => [
                 'label' => 'Confirma senha',
             ],

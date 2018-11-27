@@ -42,14 +42,14 @@ class RecebedorForm extends Form {
         ));
         $this->add([
             'name' => 'senha',
-            'type' => 'text',
+            'type' => 'password',
             'options' => [
                 'label' => 'Senha',
             ],
         ]);
         $this->add([
             'name' => 'confirmaSenha',
-            'type' => 'text',
+            'type' => 'password',
             'options' => [
                 'label' => 'Confirma senha',
             ],

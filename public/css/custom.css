@@ -8,3 +8,17 @@
 .margin-50px{
     margin: 50px;
 }
+.btn-primary {
+    color:white!important;
+    padding: 15px !important;
+    border: none !important;
+    border-radius: 0 !important;
+    background-color: #f3392f;
+}
+.text-left{
+    text-align: left;
+    margin-bottom: 20px;
+}
+.error{
+    color:red;
+}

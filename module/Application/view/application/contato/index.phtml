@@ -24,35 +24,39 @@ $form->prepare();
 echo $this->form()->openTag($form);
 ?>
 <div class="message-section">
-    <div class="container margin-50px">
+    <div class="container">
         <div class="row">
-            <div class="col-md-8 col-md-offset-2 wow fadeInDown animated">
-                <div class="col-12 mt-5">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="custom-control custom-radio custom-control-inline col-12">
-                                <?= $this->formLabel($nome) ?>
-                                <?= $this->formElement($nome) ?>
-                                <?= $this->formElementErrors()->render($nome, ['class' => 'help-block']) ?>
-                            </div>
-                            <div class="custom-control custom-radio custom-control-inline col-12">
-                                <?= $this->formLabel($assunto) ?>
-                                <?= $this->formElement($assunto) ?>
-                                <?= $this->formElementErrors()->render($assunto, ['class' => 'help-block']) ?>
-                            </div>
-                            <div class="custom-control custom-radio custom-control-inline col-12">
-                                <?= $this->formLabel($email) ?>
-                                <?= $this->formElement($email) ?>
-                                <?= $this->formElementErrors()->render($email, ['class' => 'help-block']) ?>
-                            </div>
-                            <div class="custom-control custom-radio custom-control-inline col-12">
-                                <?= $this->formLabel($menssagem) ?>
-                                <?= $this->formElement($menssagem) ?>
-                                <?= $this->formElementErrors()->render($menssagem, ['class' => 'help-block']) ?>
-                            </div>
-                            <div class="custom-control custom-radio custom-control-inline col-12">
-                                <?= $this->formElement($submit) ?>
-                                <?= $this->formElementErrors()->render($submit, ['class' => 'help-block']) ?>                         
+            <div class="col-md-12" style="background-color: lightgray;margin-top: 20px;">
+                <div class="col-md-8 col-md-offset-2 wow fadeInDown animated">
+                    <div class="col-12 mt-5 margin-50px text-left">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row" style="margin-bottom: 5px">
+                                    <div class="custom-control custom-radio custom-control-inline col-md-6">
+                                        <?= $this->formLabel($nome) ?>
+                                        <?= $this->formElement($nome) ?>
+                                        <?= $this->formElementErrors()->render($nome, ['class' => 'help-block']) ?>
+                                    </div>
+                                    <div class="custom-control custom-radio custom-control-inline col-md-6">
+                                        <?= $this->formLabel($assunto) ?>
+                                        <?= $this->formElement($assunto) ?>
+                                        <?= $this->formElementErrors()->render($assunto, ['class' => 'help-block']) ?>
+                                    </div>
+                                </div>
+                                <div class="custom-control custom-radio custom-control-inline col-12" style="margin-bottom: 5px">
+                                    <?= $this->formLabel($email) ?>
+                                    <?= $this->formElement($email) ?>
+                                    <?= $this->formElementErrors()->render($email, ['class' => 'help-block']) ?>
+                                </div>
+                                <div class="custom-control custom-radio custom-control-inline col-12" style="margin-bottom: 5px">
+                                    <?= $this->formLabel($menssagem) ?>
+                                    <?= $this->formElement($menssagem) ?>
+                                    <?= $this->formElementErrors()->render($menssagem, ['class' => 'help-block']) ?>
+                                </div>
+                                <div class="custom-control custom-radio custom-control-inline col-12"style="margin-top: 10px;">
+                                    <?= $this->formElement($submit) ?>
+                                    <?= $this->formElementErrors()->render($submit, ['class' => 'help-block']) ?>                         
+                                </div>
                             </div>
                         </div>
                     </div>

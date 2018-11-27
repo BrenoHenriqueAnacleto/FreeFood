@@ -49,6 +49,20 @@ return [
                     ],
                 ],
             ],
+             'administrador' => [
+                'type'    => Segment::class,
+                'options' => [
+                    'route'       => '/adm/administrador[/:action[/:id]]',
+                    'constraints' => [
+                        'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                        'id'     => '[0-9]+',
+                    ],
+                    'defaults'    => [
+                        'controller' => Controller\AdministradorController::class,
+                        'action'     => 'index',
+                    ],
+                ],
+            ],
             'doacao' => [
                 'type'    => Segment::class,
                 'options' => [

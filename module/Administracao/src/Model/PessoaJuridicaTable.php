@@ -10,17 +10,15 @@ use Zend\Db\TableGateway\TableGateway;
 use Zend\Paginator\Adapter\DbSelect;
 use Zend\Paginator\Paginator;
 
-class PessoaJuridicaTable
-{
+class PessoaJuridicaTable {
+
     private $tableGateway;
 
-    public function __construct(TableGatewayInterface $tableGateway)
-    {
+    public function __construct(TableGatewayInterface $tableGateway) {
         $this->tableGateway = $tableGateway;
     }
 
-    public function fetchAll($paginated = false)
-    {
+    public function fetchAll($paginated = false) {
         if ($paginated) {
             return $this->fetchPaginatedResults();
         }
@@ -28,8 +26,7 @@ class PessoaJuridicaTable
         return $this->tableGateway->select();
     }
 
-    private function fetchPaginatedResults()
-    {
+    private function fetchPaginatedResults() {
         // Create a new Select object for the table:
         $select = new Select($this->tableGateway->getTable());
 
@@ -39,12 +36,12 @@ class PessoaJuridicaTable
 
         // Create a new pagination adapter object:
         $paginatorAdapter = new DbSelect(
-        // our configured select object:
-            $select,
-            // the adapter to run it against:
-            $this->tableGateway->getAdapter(),
-            // the result set to hydrate:
-            $resultSetPrototype
+                // our configured select object:
+                $select,
+                // the adapter to run it against:
+                $this->tableGateway->getAdapter(),
+                // the result set to hydrate:
+                $resultSetPrototype
         );
 
         $paginator = new Paginator($paginatorAdapter);
@@ -52,47 +49,39 @@ class PessoaJuridicaTable
         return $paginator;
     }
 
-    public function getPessoaJuridica($id)
-    {
-        $id     = (int) $id;
-        $rowset = $this->tableGateway->select(['usuario_id' => $id]);
-        $row    = $rowset->current();
+    public function getPessoaJuridica($id) {
+        $id = (int) $id;
+        $rowset = $this->tableGateway->select(['pessoa_id' => $id]);
+        $row = $rowset->current();
         if (!$row) {
-            throw new RuntimeException(sprintf(
-                'Could not find row with identifier %d',
-                $id
-            ));
+            return null;
         }
 
         return $row;
     }
 
-    public function savePessoaJuridica(PessoaJuridica $pessoaJuridica)
-    {
-       
-        $data=$pessoaJuridica->getArrayCopySingle();
-//echo '<pre>'; print_r($data); die;
-        $id = (int) $pessoaJuridica->pessoa_id;
+    public function savePessoaJuridica(PessoaJuridica $pessoaFisica) {
 
-        if ($id === 0) {
+        $data = $pessoaFisica->getArrayCopy();
+//        echo '<pre>'; print_r($pessoaFisica); die;
+        $id = (int) $pessoaFisica->pessoa_id;
+
+        if ($this->getPessoaJuridica($id)) {
+            
+            $this->tableGateway->update($data, ['pessoa_id' => $id]);
+            return $id;
+            
+        } else {
+            
             $this->tableGateway->insert($data);
             $id = $this->tableGateway->lastInsertValue;
             return $id;
         }
-
-        if (!$this->getPessoaJuridica($id)) {
-            throw new RuntimeException(sprintf(
-                'Cannot update usuario with identifier %d; does not exist',
-                $id
-            ));
-        }
-
-        $this->tableGateway->update($data, ['pessoa_id' => $id]);
-        return $id;
+        return null;
     }
 
-    public function deletePessoaJuridica($id)
-    {
+    public function deletePessoaJuridica($id) {
         $this->tableGateway->delete(['pessoa_id' => (int) $id]);
     }
+
 }

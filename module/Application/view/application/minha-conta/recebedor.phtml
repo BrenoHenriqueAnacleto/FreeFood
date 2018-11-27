@@ -1,19 +1,20 @@
 
 <div class="table-section">
     <div class="container">
-        <div class="row">
+        <div class="row" style="background-color: white;">
             <div class="col-md-12">
                 <h2 class="section-title">Doações solicitadas</h2>
             </div>
-        </div>
-        <div class="row">
             <div class="col-md-12">
-                <a href="<?php echo $this->url('minha-conta', ['action' => 'editar']);?>">Nova solicitação</a>
-                   
+                <p style="margin-top: 10px">
+                
+                    <a style="font-size: 20px; "href="<?php echo $this->url('minha-conta', ['action' => 'editar']);?>"><i class="fa fa-plus"></i>Nova solicitação</a>
+                </p>
             </div>
         </div>
         <?php foreach ($doacoes as $doacao): ?>
         <div class="col-md-4" style="margin-top: 50px;">
+            <a class="remover-solicitacao" href="<?php echo $this->url('minha-conta', ['action' => 'remover','id' => $doacao->id]);?>"><i class="fa fa-close"></i></a>         
                     <div class="table-item sliver">
                         <h3 style="text-transform: uppercase;"><?php echo $doacao->titulo?></h3>
                         <p><?php echo $doacao->descricao?></p>

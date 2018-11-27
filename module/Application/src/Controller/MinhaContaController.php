@@ -181,5 +181,11 @@ class MinhaContaController extends \Zend\Mvc\Controller\AbstractActionController
 
         return $this->redirect()->toRoute('minha-conta');
     }
+    
+    public function removerAction () {
+        $id = $this->params()->fromRoute("id", null);
+        $this->doacaoTable->deleteDoacao($id);
+         return $this->redirect()->toRoute('minha-conta');
+    }
 
 }

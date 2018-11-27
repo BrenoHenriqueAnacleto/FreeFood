@@ -9,6 +9,7 @@
 namespace Administracao\Form;
 
 use Zend\Form\Form;
+use Zend\Form\Element;
 
 /**
  * Description of DoadorForm
@@ -42,14 +43,14 @@ class DoadorForm extends Form {
         ));
         $this->add([
             'name' => 'senha',
-            'type' => 'text',
+            'type' => 'password',
             'options' => [
                 'label' => 'Senha',
             ],
         ]);
         $this->add([
             'name' => 'confirmaSenha',
-            'type' => 'text',
+            'type' => 'password',
             'options' => [
                 'label' => 'Confirma senha',
             ],
