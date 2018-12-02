@@ -4,13 +4,13 @@ $this->headScript()->appendFile($this->basePath('js/pages/administracao/item.js'
 <div class="form-group group-item">
     <h4 class="heading_a" style="margin: 0 0 5px;">
         <i class="elusive-icon-person"></i>&nbsp;
-          Itens&nbsp;&nbsp;&nbsp;&nbsp;
+        Itens&nbsp;&nbsp;&nbsp;&nbsp;
         <a href="#itens" id="exibir_itens">
             Exibir <i class="fa fa-angle-up"></i>
         </a>
     </h4>
     <div id="itens" class="row-fluid">
-         <input type="hidden" id="qtd_itens" value="<?php echo sizeof($this->enderecos); ?>"/>
+        <input type="hidden" id="qtd_itens" value="<?php echo sizeof($this->enderecos); ?>"/>
         <?php
         $count = 0;
         foreach ($this->itens as $item):
@@ -18,7 +18,7 @@ $this->headScript()->appendFile($this->basePath('js/pages/administracao/item.js'
             <div class="item" id="<?php echo 'item' . $count; ?>">
                 <input type="hidden" name="item[<?php echo $count; ?>][id]" value="<?php echo (isset($item->id)) ? $item->id : ''; ?>"/>
                 <div class="row">
-                    <div class="form-group col-4">
+                    <div class="form-group col-md-4">
                         <label>Nome</label>
                         <?php
                         $nome = new Zend\Form\Element\Text('item[' . $count . '][nome]');
@@ -32,7 +32,7 @@ $this->headScript()->appendFile($this->basePath('js/pages/administracao/item.js'
                         echo $this->formInput($nome);
                         ?>
                     </div>
-                    <div class="form-group col-6">
+                    <div class="form-group col-md-4">
                         <label>Descrição</label>
                         <?php
                         $descricao = new Zend\Form\Element\Text('item[' . $count . '][descricao]');
@@ -46,7 +46,7 @@ $this->headScript()->appendFile($this->basePath('js/pages/administracao/item.js'
                         echo $this->formInput($descricao);
                         ?>
                     </div>
-                    <div class="col-2">
+                    <div class="col-md-2">
                         <label>Quantidade</label>
                         <?php
                         $quantidade = new Zend\Form\Element\Text('item[' . $count . '][quantidade]');
@@ -60,9 +60,7 @@ $this->headScript()->appendFile($this->basePath('js/pages/administracao/item.js'
                         echo $this->formInput($quantidade);
                         ?>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="form-group col-6">
+                    <div class="form-group col-md-2">
                         <label>Valor Unitario</label>
                         <?php
                         $valor_unitario = new Zend\Form\Element\Text('item[' . $count . '][valor_unitario]');
@@ -76,6 +74,9 @@ $this->headScript()->appendFile($this->basePath('js/pages/administracao/item.js'
                         echo $this->formInput($valor_unitario);
                         ?>
                     </div>
+                    <a class="remover_item" style="cursor: pointer;float: right">
+                        Remover
+                    </a>
                 </div>
             </div>
             <?php

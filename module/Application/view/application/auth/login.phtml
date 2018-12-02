@@ -1,6 +1,6 @@
 <div class="container" >
     <div class="row">
-        <div class="col-md-12" style="margin-bottom: 141px;margin-top: 130px;">
+        <div class="col-md-6" style="margin-bottom: 141px;margin-top: 130px;border-right:1px solid black">
             <h1>Faça seu login</h1>
 
             <?php
@@ -29,7 +29,7 @@
             <?php endif; ?>
 
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-12">
                     <?php echo $this->form()->openTag($form); ?>
 
                     <div class="form-group">
@@ -48,6 +48,18 @@
                     ?>
                 </div>
             </div>
+        </div>
+         <div class="col-md-6" style="margin-bottom: 141px;margin-top: 130px;font-size: 18px">
+         <p class="hidden-xs">&nbsp;<br>&nbsp;</p>
+                <p>
+                    Faça login para acessar a area restrita.
+                </p>
+                <p>
+                    Dúvidas?&nbsp; <a class="read-more" href="<?php echo $this->serverUrl($this->url('contato')); ?>">Clique aqui</a> e entre em contato com nossa equipe.
+                </p>
+                <p style="margin-top:40px; text-transform: none;">
+                    <a href="<?php echo $this->serverUrl($this->url('cadastro')); ?>" style="">Cadastre-se</a>
+                </P>
         </div>
     </div>
 </div>

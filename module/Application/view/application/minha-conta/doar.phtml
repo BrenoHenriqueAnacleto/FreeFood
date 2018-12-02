@@ -1,5 +1,5 @@
 
-<div class="table-section">
+<div class="table-section" style="min-height: 523px;">
     <div class="container">
         <div class="row">
             <div class="col-md-12">
@@ -7,18 +7,22 @@
             </div>
         </div>
 
-        <div class="col-md-12" style="margin-top: 50px;">
+        <div class="col-md-8" style="margin-top: 50px;left: 15%;">
             <div class="table-item sliver">
                 <h3 style="text-transform: uppercase;"><?php echo $doacoes->titulo ?></h3>
                 <p><?php echo $doacoes->descricao ?></p>
-                <?php foreach ($doacoes->itens as $item): ?>
-                    <p>
-                        <?php echo $item->nome; ?>
-                         <?php echo $item->descricao; ?>
-                         <?php echo $item->quantidade; ?>
-                         <?php echo $item->valor_unitario; ?>
-                    </p>
-                <?php endforeach; ?>
+                <ol>
+                    <?php foreach ($doacoes->itens as $item): ?>
+
+                    <li style="margin: 15px 30px 15px;text-align: left;text-transform: capitalize;font-size:16px;">
+                            <?php echo $item->nome; ?>
+                            <?php echo $item->descricao; ?>
+                            <?php echo $item->quantidade; ?>
+                            <?php echo $item->valor_unitario; ?>
+                        </li>
+
+                    <?php endforeach; ?>
+                </ol>
                 <a href="<?php echo $this->url('minha-conta', ['action' => 'salvar', 'id' => $doacoes->id]); ?>">Doar</a>
             </div>
         </div>

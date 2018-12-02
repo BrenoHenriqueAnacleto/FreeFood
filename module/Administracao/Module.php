@@ -11,8 +11,11 @@ use Zend\ModuleManager\Feature\ControllerProviderInterface;
 use Zend\ModuleManager\Feature\ServiceProviderInterface;
 use Administracao\Controller\Factory\DoadorControllerFactory;
 use Administracao\Controller\DoadorController;
+use Administracao\Controller\Factory\IndexControllerFactory;
 use Administracao\Controller\Factory\RecebedorControllerFactory;
 use Administracao\Controller\RecebedorController;
+use Administracao\Controller\Factory\AdministradorControllerFactory;
+use Administracao\Controller\AdministradorController;
 use Administracao\Controller\Factory\DoacaoControllerFactory;
 use Administracao\Controller\DoacaoController;
 use Administracao\Model\Factory\DoacaoTableFactory;
@@ -21,6 +24,8 @@ use Administracao\Model\Factory\DoadorTableFactory;
 use Administracao\Model\Factory\DoadorTableGatewayFactory;
 use Administracao\Model\Factory\RecebedorTableFactory;
 use Administracao\Model\Factory\RecebedorTableGatewayFactory;
+use Administracao\Model\Factory\AdministradorTableFactory;
+use Administracao\Model\Factory\AdministradorTableGatewayFactory;
 
 class Module implements ConfigProviderInterface, ServiceProviderInterface, ControllerProviderInterface {
 
@@ -81,9 +86,9 @@ class Module implements ConfigProviderInterface, ServiceProviderInterface, Contr
                     return new TableGateway('endereco', $dbAdapter, null, $resultSetPrototype);
                 },
                 Model\ItemTable::class => function ($container) {
-                $tableGateway = $container->get('Model\ItemTableGateway');
+                    $tableGateway = $container->get('Model\ItemTableGateway');
 
-                return new Model\ItemTable($tableGateway);
+                    return new Model\ItemTable($tableGateway);
                 },
                 'Model\ItemTableGateway' => function ($container) {
                     $dbAdapter = $container->get(AdapterInterface::class);
@@ -96,6 +101,8 @@ class Module implements ConfigProviderInterface, ServiceProviderInterface, Contr
                 Model\RecebedorTableGateway::class => RecebedorTableGatewayFactory::class,
                 Model\DoacaoTable::class => DoacaoTableFactory::class,
                 Model\DoacaoTableGateway::class => DoacaoTableGatewayFactory::class,
+                Model\AdministradorTable::class => AdministradorTableFactory::class,
+                Model\AdministradorTableGateway::class => AdministradorTableGatewayFactory::class,
             ],
         ];
     }
@@ -108,11 +115,10 @@ class Module implements ConfigProviderInterface, ServiceProviderInterface, Contr
                     return new Controller\PessoaController(
                             $container->get(Model\PessoaTable::class)
                     );
-                }, Controller\IndexController::class => function () {
-                    return new Controller\IndexController();
-                },
+                }, Controller\IndexController::class => IndexControllerFactory::class,
                 RecebedorController::class => RecebedorControllerFactory::class,
                 DoacaoController::class => DoacaoControllerFactory::class,
+                AdministradorController::class => AdministradorControllerFactory::class,
             ],
         ];
     }

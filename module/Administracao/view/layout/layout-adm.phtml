@@ -57,7 +57,7 @@
             <div class="sidebar-menu">
                 <div class="sidebar-header">
                     <div class="logo">
-                        <a href="index.html"><img src="<?=$this->basePath('images/icon/logo.png')?>"  alt="logo"></a>
+                        <a href="<?php echo $this->url('home');?>"><img src="<?=$this->basePath('images/icon/logo.png')?>"  alt="logo"></a>
                     </div>
                 </div>
                 <div class="main-menu">
@@ -72,6 +72,9 @@
                                 </li>
                                 <li class="active">
                                     <a href="<?php echo $this->url('doacao'); ?>"><i class="flaticon-charity"></i><span>Doações</span></a>
+                                </li>
+                                <li class="active">
+                                    <a href="<?php echo $this->url('administrador'); ?>"><i class="fa fa-user"  style="margin-left: 20px;"></i><span>Administrador</span></a>
                                 </li>
                                 <li class="active">
                                     <a href="index.html" aria-expanded="true"><i class="fa fa-file-o" style="margin-left: 20px;"></i><span>Página Institucional</span></a>

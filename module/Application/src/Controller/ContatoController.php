@@ -50,12 +50,12 @@ class ContatoController extends \Zend\Mvc\Controller\AbstractActionController {
      public function enviar($remetente, $destinatarios, $assunto, $textoMensagem, $anexos = array(), $replyTo = null,$cco = null) {
         
         $mensagem  = new Message();
-        $transport = new Smtp();
+//        $transport = new Smtp();
         $body      = new MimeMessage();
         $html      = new Part($textoMensagem);
         
         if(empty($remetente)){
-            
+            error_log("testeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee00");
             $remetente = $this->remetenteDefault;
         }
         
@@ -103,12 +103,23 @@ class ContatoController extends \Zend\Mvc\Controller\AbstractActionController {
         }
         
         $mensagem->setBody($body);
-        $opcoes = new SmtpOptions();
-        $transport->setOptions($opcoes);
+        $smtpOptions = new SmtpOptions();
+        $smtpOptions->setHost('smtp.gmail.com')                                             
+            ->setName('smtp.gmail.com')
+            ->setPort(587)
+            ->setConnectionClass('login')
+            ->setConnectionConfig(array(
+                               'username' => '12161004303@muz.ifsuldeminas.edu.br',
+                               'password' => 'breno1604',
+                               'ssl' => 'tls',
+                               'host'=>'127.0.0.1:8008',                                                                 
+                             )
+                  );
         
         try{
-            
+            $transport = new Smtp($smtpOptions);
             $transport->send($mensagem);
+          
             
             return true;
         } catch (\Exception $ex) {

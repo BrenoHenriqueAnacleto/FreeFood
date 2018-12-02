@@ -27,7 +27,7 @@ class AdministradorTable {
     }
 
     private function fetchPaginatedResults() {
-        $select = new \Zend\Db\Sql\Select(array('r' => 'recebedor'));
+        $select = new \Zend\Db\Sql\Select(array('r' => 'administrador'));
         $select->columns(array('*'));
         $select->join(array('pe' => 'pessoa'), 'r.pessoa_id = pe.id', array(
             'email' => 'email',
@@ -64,12 +64,13 @@ class AdministradorTable {
         return $row;
     }
 
-    public function saveAdministrador(Administrador $recebedor) {
-        $data = $recebedor->getArrayCopy();
+    public function saveAdministrador(Administrador $administrador) {
+        $data = $administrador->getArrayCopy();
 
-        $id = (int) $recebedor->id;
-
+        $id = (int) $administrador->id;
+        error_log("ollllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllaaaa");
         if ($id === 0) {
+            error_log("ollllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllaaaa2");
             $this->tableGateway->insert($data);
 
             return;
@@ -92,7 +93,7 @@ class AdministradorTable {
 
         $sql = new \Zend\Db\Sql\Sql($adapter);
 
-        $select = new \Zend\Db\Sql\Select(array('d' => 'recebedor'));
+        $select = new \Zend\Db\Sql\Select(array('d' => 'administrador'));
         $select->columns(array('*'));
         $select->join(array('pe' => 'pessoa'), 'd.pessoa_id = pe.id', array(
             'email' => 'email',

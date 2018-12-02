@@ -1,0 +1,42 @@
+<?php
+$title = 'Administrador';
+$this->headTitle($title);
+?>
+<div class="card" style="margin-top: 10px;">
+    <div class="card-header" style="background: #303641;color:white;">
+        <h1><?= $this->escapeHtml($title); ?></h1>
+        <p>
+            <a class="btn btn-flat btn-success mb-3" href="<?= $this->url('administrador', ['action' => 'add']) ?>">Novo Recebedor</a>
+        </p>
+    </div>
+    <div class="card-body">
+        <table class="table">
+            <tr>
+                <th>Email</th>
+                <th>&nbsp;</th>
+            </tr>
+            <?php foreach ($this->paginator as $administrador) : // <-- change here! ?>
+                <tr>
+                    <td><?= $this->escapeHtml($administrador->email) ?></td>
+                    <td>
+                        <a href="<?= $this->url('administrador', ['action' => 'edit', 'id' => $administrador->id]) ?>">Edit</a>
+                        <a href="<?= $this->url('administrador', ['action' => 'delete', 'id' => $administrador->id]) ?>">Delete</a>
+                    </td>
+                </tr>
+            <?php endforeach; ?>
+        </table>
+    </div>
+</div>
+
+<?=
+$this->paginationControl(
+// The paginator object:
+        $this->paginator,
+        // The scrolling style:
+        'sliding',
+        // The partial to use to render the control:
+        'partial/paginator',
+        // The route to link to when a user clicks a control link:
+        ['route' => 'administrador']
+);
+?>

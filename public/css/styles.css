@@ -193,8 +193,8 @@ button.navbar-toggle {
 .nav {
 }
 .navbar-nav {
-    margin-left: 80px;
-    margin-top: 16px;
+    margin-left: 30%;
+    margin-top: 30px;
     display: block;
 }
 
@@ -995,4 +995,19 @@ RESPONSIVE
     background-color:transparent !important;
     color: #f3392f;
     font-size: 25px;
+}
+.modal{
+    border-radius: 8px;
+    margin-top: 6%;
+    margin-left: 30%;
+    margin-right: 30%;
+    /* width: 50%; */
+    /* margin: 50%; */
+    overflow: hidden;
+    background: ghostwhite;
+    display: block;
+    height: 30%;
+}
+.table-section{
+    padding-top: 110px
 }

@@ -28,6 +28,7 @@
                 ->prependFile($this->basePath('js/pages/website/inscricao.js'))
                 ->prependFile($this->basePath('js/layoutwebsite/custom.js'))
                 ->prependFile($this->basePath('js/layoutwebsite/wow.min.js'))
+                ->prependFile($this->basePath('js/bootbox.min.js'))
                 ->prependFile($this->basePath('js/jquery/jquery.mask.min.js'))
                 ->prependFile($this->basePath('js/jquery/jquery.validate.js'))
                 ->prependFile($this->basePath('js/layoutwebsite/bootstrap.min.js'))
@@ -50,23 +51,23 @@ error_log(json_encode($user));
                         <span class="icon-bar"></span>
                     </button>
                     <a class="navbar-brand" href="#">
-                        <img src="<?php echo $this->basepath('image/logo.png') ?>" width="50" height="20" alt="" class="img-responsive">
+                        <img src="<?php echo $this->basepath('image/logo.png') ?>" width="80" height="20" alt="" class="img-responsive">
                     </a>
                 </div>
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav background-color-black">
-                        <li><a href="<?php echo $this->url('home'); ?>">Inicio</a></li>
-                        <li><a href="#">Sobre</a></li>
-                        <li><a href="<?php echo $this->url('contato'); ?>">Contato</a></li>
+                        <li><a href="<?php echo $this->url('home'); ?>"><i class="fa fa-home"></i>&nbsp;Inicio</a></li>
+                        <!--<li><a href="#">Sobre</a></li>-->
+                        <li><a href="<?php echo $this->url('contato'); ?>"><i class="fa fa-phone"></i>&nbsp;Contato</a></li>
                         <?php if (is_null($user)) :?>
-                        <li><a href="<?php echo $this->url('login'); ?>">Login</a></li>
-                        <li><a href="<?php echo $this->url('cadastro'); ?>">Cadastro</a></li>
+                        <li><a href="<?php echo $this->url('login'); ?>"><i class="fa fa-sign-in"></i>&nbsp;Login</a></li>
+                        <li><a href="<?php echo $this->url('cadastro'); ?>"><i class="fa fa-user-plus"></i>&nbsp;Cadastro</a></li>
                         <?php endif;?>
                         <?php if (!is_null($user)) :?>
-                        <li><a href="<?php echo $this->url('minha-conta'); ?>">Minha conta</a></li>
-                        <li><a href="<?php echo $this->url('logout'); ?>">Sair</a></li>
+                        <li><a href="<?php echo $this->url('minha-conta'); ?>"><i class="fa fa-user"></i>&nbsp;Minha conta</a></li>
+                        <li><a href="<?php echo $this->url('logout'); ?>"><i class="fa fa-sign-out"></i>&nbsp;Sair</a></li>
                         <?php endif;?>
                     </ul>
                 </div><!-- /.navbar-collapse -->
@@ -84,21 +85,11 @@ error_log(json_encode($user));
                         <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
                     </ul>
                 </div>
-                <div class="col-md-7 copyright">
-                    <ul class="nav navbar-nav">
-                        <li><a href="#">Home</a></li>
-                        <li><a href="#">Shop</a></li>
-                        <li><a href="#">How It Works</a></li>
-                        <li><a href="#">Testimonials</a></li>
-                        <li><a href="#">About</a></li>
-                        <li><a href="#">Blog</a></li>
-                        <li><a href="#">Contact</a></li>
-                    </ul>
+                <div class="col-md-7 copyright" style="margin-top: 40px;color: white;">
+                    <p style="color: white;">Todos direitos reservados a FreeFood</p>
                 </div>
                 <div class="col-md-3">
-                    <div class="top-button">
-                        <a href="#top-button" class="scroll"><i class="fa fa-arrow"></i></a>
-                    </div>
+
                 </div>
             </div>
         </div>

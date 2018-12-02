@@ -1,71 +1,78 @@
 <div class="custom-section">
     <div class="container-fluid">
-         <div class="custom-section" style="margin: 10%;">
-        <div class="col-md-12">
-           
-                <?php
-                $this->layout()->setVariable('js', array(
-                    'pages/administracao/item'
-                ));
-                $title = '';
-                $this->headTitle($title);
-                ?>
+        <div class="custom-section" style="margin: 10%;">
+            <div class="row">
+               
+                <div class="col-md-12">
+                    <h2 style="margin-left: 20%">Nova Solicitação</h2>
+                    <div class="col-md-8" style="margin-left: 20%;">
+                        
 
-                <?php
+                        <?php
+                        $this->layout()->setVariable('js', array(
+                            'pages/administracao/item'
+                        ));
+                        $title = '';
+                        $this->headTitle($title);
+                        ?>
+
+                        <?php
 // This provides a default CSS class and placeholder text for the title element:
 
 
-                $descricao = $form->get('descricao');
-                $descricao->setAttribute('class', 'form-control');
-                $descricao->setAttribute('placeholder', 'Descrição');
+                        $descricao = $form->get('descricao');
+                        $descricao->setAttribute('class', 'form-control');
+                        $descricao->setAttribute('placeholder', 'Descrição');
 
-                $titulo = $form->get('titulo');
-                $titulo->setAttribute('class', 'form-control');
-                $titulo->setAttribute('placeholder', 'Titulo');
+                        $titulo = $form->get('titulo');
+                        $titulo->setAttribute('class', 'form-control');
+                        $titulo->setAttribute('placeholder', 'Titulo');
 
 
 // This provides CSS classes for the submit button:
-                $submit = $form->get('submit');
-                $submit->setAttribute('class', 'btn btn-primary');
+                        $submit = $form->get('submit');
+                        $submit->setAttribute('class', 'btn btn-primary');
 
-                $form->setAttribute('action', $this->url('minha-conta', ['action' => 'receber']));
-                $form->setAttribute('enctype', 'multipart/form-data');
-                $form->prepare();
+                        $form->setAttribute('action', $this->url('minha-conta', ['action' => 'receber']));
+                        $form->setAttribute('enctype', 'multipart/form-data');
+                        $form->prepare();
 
-                echo $this->form()->openTag($form);
-                $dados_endereco = array(
-                    'form' => $form,
-                    'itens' => (isset($recibo->itens) ? $recibo->itens : array(new \stdClass()))
-                );
-                ?>
-                <?php
+                        echo $this->form()->openTag($form);
+                        $dados_endereco = array(
+                            'form' => $form,
+                            'itens' => (isset($recibo->itens) ? $recibo->itens : array(new \stdClass()))
+                        );
+                        ?>
+                        <?php
 // Wrap the elements in divs marked as form groups, and render the
 // label, element, and errors separately within 
-                ?>
+                        ?>
 
-                <div class="card">
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="form-group col-6">
-                                <?= $this->formLabel($titulo) ?>
-                                <?= $this->formElement($titulo) ?>
-                                <?= $this->formElementErrors()->render($titulo, ['class' => 'help-block']) ?>
-                            </div>
-                            <div class="form-group col-6">
-                                <?= $this->formLabel($descricao) ?>
-                                <?= $this->formElement($descricao) ?>
-                                <?= $this->formElementErrors()->render($descricao, ['class' => 'help-block']) ?>
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="form-group col-6">
+                                        <?= $this->formLabel($titulo) ?>
+                                        <?= $this->formElement($titulo) ?>
+                                        <?= $this->formElementErrors()->render($titulo, ['class' => 'help-block']) ?>
+                                    </div>
+                                    <div class="form-group col-6">
+                                        <?= $this->formLabel($descricao) ?>
+                                        <?= $this->formElement($descricao) ?>
+                                        <?= $this->formElementErrors()->render($descricao, ['class' => 'help-block']) ?>
+                                    </div>
+                                </div>
+                                <?php echo $this->partial('Administracao/item/index.phtml', $dados_endereco); ?>
+
+                                <?php
+                                echo $this->formSubmit($submit);
+                                echo $this->formHidden($form->get('status'));
+                                echo $this->formHidden($form->get('doador_id'));
+                                echo $this->formHidden($form->get('id'));
+                                echo $this->form()->closeTag();
+                                ?>
                             </div>
                         </div>
-                        <?php echo $this->partial('Administracao/item/index.phtml', $dados_endereco); ?>
-
-                        <?php
-                        echo $this->formSubmit($submit);
-                        echo $this->formHidden($form->get('status'));
-                        echo $this->formHidden($form->get('doador_id'));
-                        echo $this->formHidden($form->get('id'));
-                        echo $this->form()->closeTag();
-                        ?>
                     </div>
                 </div>
             </div>
