@@ -27,15 +27,17 @@ class MinhaContaController extends \Zend\Mvc\Controller\AbstractActionController
     public $recebedorTable;
     public $doacaoTable;
     public $itemTable;
+    public $administradorTable;
 
-    public function __construct(AuthenticationServiceInterface $authService, \Administracao\Model\PessoaTable $pessoaTable, \Administracao\Model\DoadorTable $doadorTable, \Administracao\Model\RecebedorTable $recebedorTable, \Administracao\Model\DoacaoTable $doacaoTable, \Administracao\Model\ItemTable $itemTable) {
+    public function __construct(AuthenticationServiceInterface $authService, \Administracao\Model\PessoaTable $pessoaTable, \Administracao\Model\DoadorTable $doadorTable, \Administracao\Model\RecebedorTable $recebedorTable, \Administracao\Model\DoacaoTable $doacaoTable, \Administracao\Model\ItemTable $itemTable, \Administracao\Model\AdministradorTable $administradorTable) {
 
-        $this->authService    = $authService;
-        $this->doadorTable    = $doadorTable;
-        $this->pessoaTable    = $pessoaTable;
-        $this->recebedorTable = $recebedorTable;
-        $this->doacaoTable    = $doacaoTable;
-        $this->itemTable      = $itemTable;
+        $this->authService        = $authService;
+        $this->doadorTable        = $doadorTable;
+        $this->pessoaTable        = $pessoaTable;
+        $this->recebedorTable     = $recebedorTable;
+        $this->doacaoTable        = $doacaoTable;
+        $this->itemTable          = $itemTable;
+        $this->administradorTable = $administradorTable;
     }
 
     public function indexAction() {
@@ -46,6 +48,7 @@ class MinhaContaController extends \Zend\Mvc\Controller\AbstractActionController
             $pessoa = $this->pessoaTable->getPessoaPorEmail($email);
             $doador = $this->doadorTable->getDoadorPorPessoaId($pessoa->id);
             $recebedor = $this->recebedorTable->getRecebedorPorPessoaId($pessoa->id);
+            $administrador = $this->administradorTable->getAdministradorPorPessoaId($pessoa->id);
 
             if ($doador) {
 
@@ -54,6 +57,10 @@ class MinhaContaController extends \Zend\Mvc\Controller\AbstractActionController
             if ($recebedor) {
 
                 return $this->redirect()->toRoute('minha-conta', ['controller' => 'minha-conta', 'action' => 'recebedor']);
+            }
+            if ($administrador) {
+
+                return $this->redirect()->toRoute('adm');
             }
         }
         return $this->redirect()->toRoute('home');
